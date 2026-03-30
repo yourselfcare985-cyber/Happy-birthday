@@ -1,1 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Harshita ❤️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+    color:white;
+}
+
+/* 🎥 VIDEO */
+video{
+    position:fixed;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+    transition:opacity 1s ease;
+}
+
+    #centerText{
+    font-family:'Nunito', sans-serif;
+    }
+    
+/* 🔥 OVERLAY */
+#overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+/* ❤️ HEART */
+.heart{
+    font-size:60px;
+    cursor:pointer;
+    animation:beat 1s infinite;
+}
+
+@keyframes beat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+/* CENTER TEXT */
+#centerText{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:22px;
+    opacity:0;
+    transition:opacity 0.6s ease;
+    text-align:center;
+}
+
+/* 🎂 CARD */
+#card{
+    display:none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0.8);
+    text-align:center;
+    opacity:0;
+    transition:all 0.8s ease;
+}
+
+#card.show{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+}
+
+#title1{font-size:24px;opacity:0.8;}
+#title2{font-size:48px;font-weight:700;}
+    
+.fade-up{
+    opacity:0 !important;
+    transform:translateY(-30px) scale(0.9);
+    transition:all 0.6s ease;
+}
+#messageCard{
+    margin-top:20px;
+    background:rgba(0,0,0,0.5);
+    padding:20px;
+    border-radius:15px;
+    display:none;
+}
+
+#messageCard.show{
+    display:block;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* 💥 HEART BURST */
+.heart-burst{
+    position:fixed;
+    font-size:20px;
+    pointer-events:none;
+    animation:burst 1s ease forwards;
+}
+
+@keyframes burst{
+    0%{opacity:1; transform:translate(0,0) scale(1);}
+    100%{opacity:0; transform:translate(var(--x), var(--y)) scale(1.8);}
+}
+
+/* FIX newline */
+#introText{white-space:pre-line;}
+</style>
+</head>
+
+<body>
+
+<!-- 🎥 VIDEOS -->
+<video id="bg1" autoplay muted loop>
+<source src="From Main Klickpin CF- Pinterest Video - 6Y0kWTCBv (1).mp4" type="video/mp4">
+</video>
+
+<video id="bg2" autoplay muted loop style="opacity:0;">
+<source src="From Main Klickpin CF- Video Pinterest - 1157GYOZh.mp4" type="video/mp4">
+</video>
+
+<!-- 🔥 INTRO -->
+<div id="overlay">
+    <div id="introHeading">Here's something for you, Madam jii💕</div>
+    <div id="introText"></div>
+    <div id="centerText"></div>
+    <div class="heart" onclick="start()">❤️</div>
+</div>
+
+<!-- 🎂 MAIN -->
+<div id="card">
+    <h1 id="title1"></h1>
+    <h2 id="title2"></h2>
+
+    <div id="messageCard">
+        <p id="finalMessage"></p>
+    </div>
+</div>
+
+<script>
+
+/* 🔥 TYPE FUNCTION */
+function typeText(el,text,speed,callback){
+    let i=0;
+    el.innerHTML="";
+    function t(){
+        if(i<text.length){
+            el.innerHTML+=text.charAt(i++);
+            setTimeout(t,speed);
+        }else if(callback) callback();
+    }
+    t();
+}
+
+/* ❤️ START */
+function start(){
+
+    let heading = document.getElementById("introHeading");
+    let intro = document.getElementById("introText");
+    let heart = document.querySelector(".heart");
+
+    // 🎬 animate sabko ek saath hatao
+    heading.classList.add("fade-up");
+    intro.classList.add("fade-up");
+    heart.classList.add("fade-up");
+
+    // 🎥 video switch
+    document.getElementById("bg1").style.opacity=0;
+    document.getElementById("bg2").style.opacity=1;
+
+    // ⏳ animation complete hone do
+    setTimeout(()=>{
+
+        heading.style.display="none";
+        intro.style.display="none";
+        heart.style.display="none";
+
+        // 👉 ab intro type hoga
+        typeText(
+            document.getElementById("introText"),
+            "Dear Harshita ❤️\nthis is for you 🫶",
+            60,
+            ()=>setTimeout(showWish,800)
+        );
+
+    },600);
+    }
+
+/* ✨ CENTER WISH */
+function showWish(){
+    let c=document.getElementById("centerText");
+    c.style.opacity=1;
+
+    typeText(
+        c,
+        "I'm wishing you a many many happy returns of the day",
+        40,
+        ()=>{
+            setTimeout(()=>{
+                c.style.opacity=0;
+                setTimeout(showMain,400);
+            },1000);
+        }
+    );
+}
+
+/* 🎂 MAIN SCREEN */
+function showMain(){
+
+    document.getElementById("overlay").style.display="none";
+
+    let card=document.getElementById("card");
+    card.style.display="block";
+    setTimeout(()=>card.classList.add("show"),50);
+
+    typeText(title1,"Happy Birthday 🎂",60,()=>{
+
+        setTimeout(()=>{
+            typeText(title2,"Harshita ❤️❤️",80,()=>{
+
+                triggerHearts();
+                setTimeout(openMessage,800);
+
+            });
+        },500);
+
+    });
+}
+
+/* 💥 HEART BURST */
+function triggerHearts(){
+    let cx=window.innerWidth/2;
+    let cy=window.innerHeight/2;
+
+    for(let i=0;i<25;i++){
+        let h=document.createElement("div");
+        h.className="heart-burst";
+        h.innerHTML="💖";
+
+        let angle=Math.random()*2*Math.PI;
+        let dist=Math.random()*150+50;
+
+        let x=Math.cos(angle)*dist+"px";
+        let y=Math.sin(angle)*dist+"px";
+
+        h.style.setProperty("--x",x);
+        h.style.setProperty("--y",y);
+
+        h.style.left=cx+"px";
+        h.style.top=cy+"px";
+
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),1000);
+    }
+}
+
+/* 💌 MESSAGE */
+function openMessage(){
+    document.getElementById("messageCard").classList.add("show");
+
+    let msg=`There’s something really special about you…
+the way you smile makes everything feel lighter.
+
+You have a calm, positive vibe that’s rare.
+
+Stay exactly the way you are,
+because honestly… it suits you perfectly 🌸`;
+
+    typeText(finalMessage,msg,30);
+}
+
+</script>
+
+</body>
+</html>
